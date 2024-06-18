@@ -8,9 +8,10 @@ import { useState } from "react";
 interface Props {
   items: string[];
   heading: string;
+  onSelect: (item: string) => void;
 }
 
-export default function ListGroup({ items, heading }: Props) {
+export default function ListGroup({ items, heading, onSelect }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   // const handleClick = (event: MouseEvent, index: number) => {
@@ -26,7 +27,10 @@ export default function ListGroup({ items, heading }: Props) {
           <ListItemButton
             key={index}
             selected={selectedIndex === index}
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => {
+              setSelectedIndex(index);
+              onSelect(item);
+            }}
           >
             <ListItem id={index.toString()} key={index}>
               {item}
