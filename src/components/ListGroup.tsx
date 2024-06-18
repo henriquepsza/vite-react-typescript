@@ -2,50 +2,34 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
+import { Typography } from "@mui/material";
+import { useState } from "react";
 
-export default function BasicList() {
+export default function ListGroup() {
+  const items = ["Brasilia", "São Paulo", "Belo Horizonte", "Rio de Janeiro"];
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+
+  // const handleClick = (event: MouseEvent, index: number) => {
+  //   console.log(index);
+  //   setSelectedIndex(index);
+  // };
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      <nav aria-label="main mailbox folders">
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText primary="Inbox" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <DraftsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Drafts" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </nav>
-      <Divider />
-      <nav aria-label="secondary mailbox folders">
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Trash" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemText primary="Spam" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </nav>
+      <Typography variant="h3">List Group</Typography>
+      {items.length === 0 && <Typography>No item found</Typography>}
+      <List>
+        {items.map((item, index) => (
+          <ListItemButton
+            key={index}
+            selected={selectedIndex === index}
+            onClick={() => setSelectedIndex(index)}
+          >
+            <ListItem id={index.toString()} key={index}>
+              {item}
+            </ListItem>
+          </ListItemButton>
+        ))}
+      </List>
     </Box>
   );
 }

@@ -1,9 +1,12 @@
-import BasicList from "./components/ListGroup.tsx";
+import ListGroup from "./components/ListGroup.tsx";
+import Box from "@mui/material/Box";
 
 function App() {
   return (
-      <BasicList/>
-  )
+    <Box>
+      <ListGroup />
+    </Box>
+  );
 }
 
-export default App
+export default App;
