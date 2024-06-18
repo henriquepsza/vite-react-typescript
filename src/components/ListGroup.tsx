@@ -5,8 +5,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import { Typography } from "@mui/material";
 import { useState } from "react";
 
-export default function ListGroup() {
-  const items = ["Brasilia", "São Paulo", "Belo Horizonte", "Rio de Janeiro"];
+interface Props {
+  items: string[];
+  heading: string;
+}
+
+export default function ListGroup({ items, heading }: Props) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   // const handleClick = (event: MouseEvent, index: number) => {
@@ -15,8 +19,8 @@ export default function ListGroup() {
   // };
   return (
     <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      <Typography variant="h3">List Group</Typography>
-      {items.length === 0 && <Typography>No item found</Typography>}
+      <Typography variant="h3">{heading}</Typography>
+      {items.length === 0 && <Typography>{heading}</Typography>}
       <List>
         {items.map((item, index) => (
           <ListItemButton
