@@ -1,6 +1,8 @@
 import ExpenseList from "./components/ExpenseList.tsx";
 import { useState } from "react";
 import ExpenseFilter from "./components/ExpenseFilter.tsx";
+import ExpenseForm from "./components/ExpenseForm.tsx";
+import categories from "./Categories.ts";
 
 // function createData(
 //   id: number,
@@ -54,7 +56,9 @@ const ExpensePage = () => {
 
   return (
     <>
+      <ExpenseForm />
       <ExpenseFilter
+        categories={categories}
         onSelectCategory={(category) => setSelectedCategory(category)}
         category={selectedCategory}
       />

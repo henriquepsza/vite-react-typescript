@@ -1,13 +1,14 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 interface Props {
+  categories: string[];
   onSelectCategory: (category: string) => void;
   category: string;
 }
 
-const ExpenseFilter = ({ onSelectCategory, category }: Props) => {
+const ExpenseFilter = ({ categories, onSelectCategory, category }: Props) => {
   return (
-    <FormControl fullWidth>
+    <FormControl fullWidth margin={"normal"}>
       <InputLabel id={"demo-simple-select-label"}>All categories</InputLabel>
       <Select
         labelId={"demo-simple-select-label"}
@@ -17,9 +18,9 @@ const ExpenseFilter = ({ onSelectCategory, category }: Props) => {
         onChange={(event) => onSelectCategory(event.target.value)}
       >
         <MenuItem value={""}>All categories</MenuItem>
-        <MenuItem value={"Groceries"}>Groceries</MenuItem>
-        <MenuItem value={"Utilities"}>Utilities</MenuItem>
-        <MenuItem value={"Entertainment"}>Entertainment</MenuItem>
+        {categories.map((category) => (
+          <MenuItem value={category}>{category}</MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
