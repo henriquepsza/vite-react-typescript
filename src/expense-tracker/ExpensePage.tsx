@@ -1,5 +1,6 @@
 import ExpenseList from "./components/ExpenseList.tsx";
 import { useState } from "react";
+import ExpenseFilter from "./components/ExpenseFilter.tsx";
 
 // function createData(
 //   id: number,
@@ -29,7 +30,7 @@ const ExpensePage = () => {
       id: 2,
       description: "bbb",
       amount: 20,
-      category: "Utilities",
+      category: "Groceries",
     },
     {
       id: 3,
@@ -41,15 +42,27 @@ const ExpensePage = () => {
       id: 4,
       description: "ddd",
       amount: 15,
-      category: "Utilities",
+      category: "Entertainment",
     },
   ]);
 
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const visibleExpenses = selectedCategory
+    ? expenses.filter((expense) => expense.category === selectedCategory)
+    : expenses;
+
   return (
-    <ExpenseList
-      expenses={expenses}
-      onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
-    />
+    <>
+      <ExpenseFilter
+        onSelectCategory={(category) => setSelectedCategory(category)}
+        category={selectedCategory}
+      />
+      <ExpenseList
+        expenses={visibleExpenses}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id !== id))}
+      />
+    </>
   );
 };
 
