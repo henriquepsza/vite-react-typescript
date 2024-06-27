@@ -19,7 +19,9 @@ const ExpenseFilter = ({ categories, onSelectCategory, category }: Props) => {
       >
         <MenuItem value={""}>All categories</MenuItem>
         {categories.map((category) => (
-          <MenuItem value={category}>{category}</MenuItem>
+          <MenuItem key={category} value={category}>
+            {category}
+          </MenuItem>
         ))}
       </Select>
     </FormControl>

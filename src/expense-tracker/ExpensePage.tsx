@@ -4,22 +4,6 @@ import ExpenseFilter from "./components/ExpenseFilter.tsx";
 import ExpenseForm from "./components/ExpenseForm.tsx";
 import categories from "./Categories.ts";
 
-// function createData(
-//   id: number,
-//   description: string,
-//   amount: number,
-//   category: string,
-// ) {
-//   return { id, description, amount, category };
-// }
-//
-// const rows = [
-//   createData(1, "aaa", 10, "Utilities"),
-//   createData(2, "bbb", 15, "Utilities"),
-//   createData(3, "ccc", 20, "Utilities"),
-//   createData(4, "ddd", 25, "Utilities"),
-// ];
-
 const ExpensePage = () => {
   const [expenses, setExpenses] = useState([
     {
@@ -54,9 +38,13 @@ const ExpensePage = () => {
     ? expenses.filter((expense) => expense.category === selectedCategory)
     : expenses;
 
+  const handleAddExpense = (newExpense) => {
+    setExpenses([...expenses, { id: expenses.length + 1, ...newExpense }]);
+  };
+
   return (
     <>
-      <ExpenseForm />
+      <ExpenseForm onAddExpense={handleAddExpense} />
       <ExpenseFilter
         categories={categories}
         onSelectCategory={(category) => setSelectedCategory(category)}
