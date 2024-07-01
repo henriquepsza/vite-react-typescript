@@ -1,11 +1,7 @@
-import ExpensePage from "./expense-tracker/ExpensePage.tsx";
+import ResponsiveDrawer from "./pages/ResponsiveDrawer.tsx";
 
 function App() {
-  return (
-    <>
-      <ExpensePage />
-    </>
-  );
+  return <ResponsiveDrawer />;
 }
 
 export default App;
