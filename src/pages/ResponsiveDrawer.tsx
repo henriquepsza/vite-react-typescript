@@ -1,22 +1,39 @@
 // src/components/ResponsiveDrawer.tsx
-
-import { Box, CssBaseline, Drawer, Toolbar, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CssBaseline,
+  Drawer,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
-import Navbar from "../components/NavBar.tsx";
+import Navbar from "../components/NavBar";
+import axios from "axios";
 
-// Define a largura do Drawer
 const drawerWidth = 240;
 
-// Define a interface para as props do componente ResponsiveDrawer
 interface ResponsiveDrawerProps {
-  window?: () => Window; // Propriedade opcional para fornecer uma referência à janela
+  window?: () => Window;
 }
 
 const ResponsiveDrawer = ({ window }: ResponsiveDrawerProps) => {
-  const [mobileOpen, setMobileOpen] = useState(false); // Estado para gerenciar a visibilidade do Drawer no mobile
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen); // Alterna a visibilidade do Drawer
+    setMobileOpen(!mobileOpen);
+  };
+
+  const handlePrint = async () => {
+    try {
+      const response = await axios.post("http://localhost:3001/print", {
+        text: "Hello, this is a test print!",
+      });
+      alert(response.data);
+    } catch (error) {
+      console.error(error);
+      alert("Error printing");
+    }
   };
 
   const drawer = (
@@ -48,7 +65,7 @@ const ResponsiveDrawer = ({ window }: ResponsiveDrawerProps) => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Melhor performance de abertura no mobile
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -80,11 +97,14 @@ const ResponsiveDrawer = ({ window }: ResponsiveDrawerProps) => {
           flexGrow: 1,
           p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
-          mt: 8, // Ajusta a margem superior baseado na altura da AppBar
+          mt: 8,
         }}
       >
         <Toolbar />
         <Typography paragraph>Main content goes here.</Typography>
+        <Button variant="contained" color="primary" onClick={handlePrint}>
+          Print Test
+        </Button>
       </Box>
     </Box>
   );
